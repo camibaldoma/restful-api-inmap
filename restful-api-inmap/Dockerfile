@@ -1,5 +1,17 @@
+FROM maven:3.9.9-eclipse-temurin-17 AS builder
+WORKDIR /app
+
+COPY pom.xml .
+COPY .mvn .mvn
+COPY mvnw .
+COPY src src
+
+RUN chmod +x mvnw && ./mvnw clean package -DskipTests
+
 FROM eclipse-temurin:17-jre
-ARG JAR_FILE=target/restfulApiInMap-0.0.1-SNAPSHOT.jar
-COPY ${JAR_FILE} app_Inmap.jar
+WORKDIR /app
+
+COPY --from=builder /app/target/restfulApiInMap-0.0.1-SNAPSHOT.jar app_Inmap.jar
+
 EXPOSE 8080
 ENTRYPOINT ["java","-jar","app_Inmap.jar"]

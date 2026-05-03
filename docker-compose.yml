@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  restful-api-inmap:
+    build: restful-api-inmap
+    mem_limit: 512m
+    ports:
+      - "8080:8080"
+    environment:
+      DB_URL: jdbc:postgresql://api_inmap:5432/InMap_DB
+      DB_USER: postgres
+      DB_PASS: ${DB_PASS}
+      MAIL_USER: ${MAIL_USER}
+      MAIL_PASS: ${MAIL_PASS}
+      SENDINBLUE_API_KEY: ${SENDINBLUE_API_KEY}
+    restart: always
+    depends_on:
+      api_inmap:
+          condition: service_healthy
+  api_inmap:
+    image: postgres:18.1
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: InMap_DB
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${DB_PASS}
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d InMap_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 10

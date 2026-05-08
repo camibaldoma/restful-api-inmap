@@ -87,7 +87,7 @@ public class EmailServiceImplementation implements EmailService {
                 .build();
         password_reset_tokensRepository.save(resetToken);
         String uuid = resetToken.getToken();
-        String link = "https://tu-app-web.com/reset-password?token=" + uuid;
+        String link = "https://inmap-admin.onrender.com/reset-password?token=" + uuid;
         sendTextEmail(usuario.getEmail(), "Recuperación de contraseña - InMap", "Hola " + usuario.getUsername() + ", haz clic aquí para cambiar tu clave: " + link);
 
 

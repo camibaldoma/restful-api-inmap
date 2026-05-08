@@ -38,4 +38,16 @@ public interface AsignacionRepository extends JpaRepository<Asignacion, String> 
                                         @Param("fin") String fin);
     @Query("SELECT a.idAsignacion FROM Asignacion a WHERE a.idAsignacion LIKE 'A%' ORDER BY CAST(SUBSTRING(a.idAsignacion, 2) AS int) DESC LIMIT 1")
     String findLastId();
+    @Query("SELECT COUNT(a) > 0 FROM Asignacion a " +
+            "WHERE a.destino.idDestino = :idDestino " +
+            "AND a.horario.dias = :dia " +
+            "AND a.idAsignacion <> :idActual " +
+            "AND NOT (a.horario.horaFin <= :inicio OR a.horario.horaInicio >= :fin)")
+    boolean existsChoqueDeHorarioExcluyendoActual(
+            @Param("idDestino") String idDestino,
+            @Param("dia") String dia,
+            @Param("inicio") String inicio,
+            @Param("fin") String fin,
+            @Param("idActual") String idActual
+    );
 }

@@ -107,7 +107,7 @@ public class AsignacionServiceImplementation implements AsignacionService {
             String fin = asignacion.getHorario().getHoraFin();
             String idDestino = asignacion.getDestino().getIdDestino();
             String codMateria = asignacion.getMateria().getCodMateria();
-            boolean estaOcupado = asignacionRepository.existsChoqueDeHorario(idDestino, dia, inicio, fin);
+            boolean estaOcupado = asignacionRepository.existsChoqueDeHorarioExcluyendoActual(idDestino, dia, inicio, fin,id);
             //Lo de materia se va a dejar, porque a una materia se le pueden asignar más de un espacio si la cantidad de alumnos es muy grande
             boolean materiaDuplicada = asignacionRepository.existsMateriaDuplicada(codMateria,dia,inicio,fin);
             if (estaOcupado) {

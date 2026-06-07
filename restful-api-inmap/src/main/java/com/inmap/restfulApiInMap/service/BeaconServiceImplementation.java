@@ -41,6 +41,7 @@ public class BeaconServiceImplementation implements BeaconService {
             beacon.setResetReason(beaconDTO.getResetReason());
             beacon.setLastReportAt(time);
             beacon.setIsActive(beaconDTO.getIsActive());
+            beacon.setReportType(beaconDTO.getReportType());
             beaconRepository.save(beacon);
         }
         else {

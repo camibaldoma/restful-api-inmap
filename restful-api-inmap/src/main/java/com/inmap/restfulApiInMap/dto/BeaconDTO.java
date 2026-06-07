@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.OffsetDateTime;
+
 import java.util.UUID;
 
 @Data
@@ -24,4 +24,5 @@ public class BeaconDTO {
     String wakeupCause;
     String resetReason;
     Boolean isActive;
+    String reportType;
 }

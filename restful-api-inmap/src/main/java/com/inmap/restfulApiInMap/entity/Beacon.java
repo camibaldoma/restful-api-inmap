@@ -87,4 +87,8 @@ public class Beacon {
     @NotNull(message = "El estado es obligatorio")
     private Boolean isActive;
 
+    @Column(name = "report_type")
+    private String reportType;
+
+
 }

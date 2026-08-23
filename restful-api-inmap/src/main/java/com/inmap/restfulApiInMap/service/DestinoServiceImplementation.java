@@ -9,6 +9,7 @@ import com.inmap.restfulApiInMap.repository.DestinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -47,7 +48,7 @@ public class DestinoServiceImplementation implements DestinoService {
         D07 LIVRA (Laboratorio de Instrumentación Virtual y Robótica Aplicada)
         D08 LPI (Laboratorio de Procesamiento de Imágenes)
          */
-        List<DestinoReducidoDTO> destinos = null;
+        List<DestinoReducidoDTO> destinos = new ArrayList<>();
         for(int i = 1; i < 9; i++)
         {
             String id_destino = "D0" + i;

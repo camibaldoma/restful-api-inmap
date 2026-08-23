@@ -48,7 +48,7 @@ public class DestinoController {
 
     @PutMapping("/actualizarDestino/{id}")
     public Destino updateDestino(@PathVariable String id, @RequestBody Destino destino)  throws NotFoundException, ArgumentNotValidException {
-        return destinoService.updateDestino(id, destino);git add .
+        return destinoService.updateDestino(id, destino);
     }
 
     @DeleteMapping("/eliminarDestino/{id}")

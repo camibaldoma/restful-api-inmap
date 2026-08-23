@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Objects;
 
+
 @Service
 public class DestinoServiceImplementation implements DestinoService {
     @Autowired
@@ -32,7 +33,69 @@ public class DestinoServiceImplementation implements DestinoService {
         }
 
     }
+    //Permite retornar solo las siglas de los destinos cuyo nombre es extremadamente largo
+    @Override
+    public List<DestinoReducidoDTO> obtenerDestinosAcortados() throws NotFoundException
+    {
+        /*Los IDs correspondientes a los destinos con siglas son:
+        D01 Laboratorio electrónica 1
+        D02 Laboratorio electrónica 2
+        D03 LIC (Laboratorio de Instrumentación y Control)
+        D04 LAC (Laboratorio de Comunicaciones)
+        D05 LABI (Laboratorio de Bioingeniería)
+        D06 LC (Laboratorio de Componentes)
+        D07 LIVRA (Laboratorio de Instrumentación Virtual y Robótica Aplicada)
+        D08 LPI (Laboratorio de Procesamiento de Imágenes)
+         */
+        List<DestinoReducidoDTO> destinos = null;
+        for(int i = 1; i < 9; i++)
+        {
+            String id_destino = "D0" + i;
+            List<DestinoReducidoDTO> destino = destinoRepository.findDestino(id_destino);
+            if(destino == null || destino.isEmpty())
+            {
+                throw new NotFoundException("Destino no encontrado");
+            }
+            else {
+                String newName=" ";
+                switch (i) {
+                    case 1:
+                        newName = "Lab electrónica 1";
+                        break;
 
+                    case 2:
+                        newName = "Lab electrónica 2";
+                        break;
+
+                    case 3:
+                        newName = "LIC";
+                        break;
+                    case 4:
+                        newName = "LAC";
+                        break;
+                    case 5:
+                        newName = "LABI";
+                        break;
+                    case 6:
+                        newName = "LC";
+                        break;
+                    case 7:
+                        newName = "LIVRA";
+                        break;
+                    case 8:
+                        newName = "LPI";
+                        break;
+                    default:
+                        // Código si no coincide con ningún caso
+                        break;
+                }
+                DestinoReducidoDTO destinoToChange= destino.get(0);
+                destinoToChange.setNombreDestino(newName);
+                destinos.add(destinoToChange);
+            }
+        }
+        return destinos;
+    }
     @Override
     public Destino saveDestino(Destino destino) throws ArgumentNotValidException {
         if (destinoRepository.existsById(destino.getIdDestino())) {

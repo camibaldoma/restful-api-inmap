@@ -34,6 +34,11 @@ public class DestinoController {
     public List<DestinoReducidoDTO> findDestino(@PathVariable String id) throws NotFoundException {
         return destinoService.findDestino(id);
     }
+    @GetMapping("/destinosAcortados")
+    public List<DestinoReducidoDTO> obtenerDestinosAcortados() throws NotFoundException
+    {
+        return destinoService.obtenerDestinosAcortados();
+    }
 
     @PostMapping("/guardarDestino")
     @ResponseStatus(HttpStatus.CREATED) // Esto fuerza el código 201

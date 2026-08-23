@@ -11,6 +11,7 @@ import java.util.List;
 public interface DestinoService {
     List<Destino> obtenerTodosDestinos();
     List<DestinoReducidoDTO> findDestino(String id_destino)  throws NotFoundException;
+    List<DestinoReducidoDTO> obtenerDestinosAcortados() throws NotFoundException;
     Destino saveDestino(Destino destino) throws ArgumentNotValidException;
     Destino updateDestino(String id, Destino destino)  throws NotFoundException,ArgumentNotValidException;
     void deleteDestino(String id)  throws NotFoundException;
